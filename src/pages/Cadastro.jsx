@@ -13,7 +13,7 @@ function Cadastro() {
     e.preventDefault();
     const body = { name, email, password };
     try {
-      await axios.post('http://localhost:5009/cadastro', body);
+      await axios.post('http://localhost:5000/signUp', body);
 
       navigator('/');
     } catch (error) {
@@ -38,7 +38,7 @@ function Cadastro() {
           Cadastrar
         </button>
         <p>
-          <Link to="/" style={{ fontSize: 14, color: 'white' }}>
+          <Link to="/" style={{ fontSize: 14, color: 'black' }}>
             Já tem uma conta? Entre agora!
           </Link>
         </p>

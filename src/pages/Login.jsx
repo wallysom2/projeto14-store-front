@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import UserContext from '../contexts/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,12 +15,12 @@ function Login() {
     e.preventDefault();
     const body = { email, password };
     try {
-      const { data } = await axios.post('http://localhost:5009/login', body);
+      const { data } = await axios.post('http://localhost:5000/signIn', body);
 
       setUser(data);
       navigator('/home');
     } catch (error) {
-      console.error('Erro ao fazer o login');
+      console.error('Erro ao fazer o login', error);
     }
   }
 
@@ -38,7 +39,7 @@ function Login() {
           Entrar
         </button>
         <p>
-          <Link to="/cadastro" style={{ fontSize: 14, color: 'white' }}>
+          <Link to="/cadastro" style={{ fontSize: 14, color: 'black' }}>
             Primeira vez? Cadastrate-se!
           </Link>
         </p>

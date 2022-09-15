@@ -4,7 +4,6 @@ import GlobalStyle from './reset/GlobalStyles'
 
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
-import Home from './pages/Home';
 import Loja from './components/Loja/Loja'
 
 import UserContext from '../src/contexts/UserContext';

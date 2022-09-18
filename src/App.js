@@ -18,9 +18,9 @@ function App() {
             <GlobalStyle/>
                 <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Login />} /> 
+                    <Route path="/" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
-                    <Route path="/loja" element={<Loja/>}></Route>
+                    <Route path="/" element={<Loja/>}></Route>
                 </Routes>
                 </BrowserRouter>
             </UserContext.Provider>

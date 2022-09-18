@@ -3,17 +3,54 @@ import React from "react";
 import {IoCartOutline} from "react-icons/io5"
 import {IoCartSharp} from "react-icons/io5"
 import { createGlobalStyle } from 'styled-components'
+import Produtos from "../Produtos";
+import { useEffect,useState } from "react";
+import axios from "axios";
 
 
 
 
 export default function Loja(){
-   
     const style = { color: "yellow", fontSize: "2.3em" }
+    const [acessorys,setAcessorys]=useState([])
+    const [videos,setVideos]=useState([])
+    const [notebooks,setNotebooks]=useState([])
+    const [produtox,setProdutox]=useState([])
 
-    function teste(){
-
+    function FiltragemVideo(value){
+        if(value.type == "video-card"){
+            return value
+        }
     }
+    function FiltragemNotebook(value){
+        if(value.type == "notebook"){
+            return value
+        }
+    }
+    function FiltragemAcessory(value){
+        if(value.type == "acessory"){
+            return value
+        }
+    }
+
+
+    useEffect(()=>{
+        async function Itens(){
+            try{
+                const promise=await axios.get('http://localhost:5000/produtos')
+                const produtos = promise.data
+                setProdutox(produtos)
+                setVideos(produtos.filter(FiltragemVideo))
+                setNotebooks(produtos.filter(FiltragemNotebook))
+                setAcessorys(produtos.filter(FiltragemAcessory))
+
+            }catch(error){
+                console.log(error)
+            }
+        }
+        Itens()
+    },[])
+
     return(
         <>
        < GlobalStyle/>
@@ -24,219 +61,28 @@ export default function Loja(){
         <Welcome>Seja Bem vindo Fulano!</Welcome>
         <Category>
             <h1>Acessórios</h1>
-            
-            <Products>
-             <div onClick={teste}>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div><div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-            
-            </Products>
+            <Objetos>
+           {acessorys.map((acessory)=>{return(<Produtos name={acessory.name} price={acessory.price} image={acessory.image}/>)})}
+           </Objetos>
         </Category>
         <Category>
-            <h1>Monitores</h1>
-            <Products>
-            <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-            </Products>
+            <h1>Placas de vídeo</h1>
+            <Objetos>
+           {videos.map((video)=>{return(<Produtos name={video.name} price={video.price} image={video.image}/>)})}
+           </Objetos>
         </Category>
         <Category>
             <h1>Peças</h1>
-            <Products>
-            <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-            </Products>
+            <Objetos>
+           {notebooks.map((notebook)=>{return(<Produtos name={notebook.name} price={notebook.price} image={notebook.image}/>)})}
+           </Objetos>
         </Category>
         <Category>
-            <h1>Acessórios</h1>
-            <Products>
-            <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-                <div>
-                <img src='https://www.pngmart.com/files/2/Computer-Mouse-PNG-Image.png'/>
-               <h1>Mouse</h1>
-               <h2> R$20,00</h2>
-                </div>
-            </Products>
+            <h1>Produtos em destaque</h1>
+            <Objetos>
+               {produtox.map((produto)=>{return(<Produtos name={produto.name} price={produto.price} image={produto.image}/>)})} 
+            </Objetos>
+            
         </Category>
 
 
@@ -282,59 +128,18 @@ const Category=styled.div`
     }
     
 `
-const Products=styled.div`
+const Objetos=styled.div`
 
    display: flex;
 
    overflow-x: scroll;
 
     width: 100%;
-    height: 180px;
+    height: 250px;
     margin-top: 10px;
-    
+    `
 
 
-div{
-
-       display:flex;
-       flex-direction:column;
-       align-items:center;
-       justify-content:center;
-       
-        width:35vh;
-        height:20vh;
-        
-        margin-right:10px;
-        border-radius:5px;
-        object-fit:cover;
-        background-color:rgb(100, 113, 119);
-        :active{
-            background-color:yellow;      
-        }
-        
-        
-    
-    img{
-        object-fit:contain;
-        width:80%;
-        height:10vh;
-        margin-bottom:20px;
-        
-       
-    
-    }
-    h1{
-       padding-left:20px;
-        width:15vh;
-       color:#FFFFFF;
-       font-size:20px;
-    }
-    h2{
-        font-family:'Bebas Neue';
-        font-size:18px;
-    }
-    }
-`
 const GlobalStyle = createGlobalStyle`
   body {
     background-color:#202327;

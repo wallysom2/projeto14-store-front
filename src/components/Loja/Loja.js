@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React from "react";
 import {IoCartOutline} from "react-icons/io5"
-import {IoCartSharp} from "react-icons/io5"
 import { createGlobalStyle } from 'styled-components'
 import Produtos from "../Produtos";
 import { useEffect,useState } from "react";
@@ -18,17 +17,17 @@ export default function Loja(){
     const [produtox,setProdutox]=useState([])
 
     function FiltragemVideo(value){
-        if(value.type == "video-card"){
+        if(value.type === "video-card"){
             return value
         }
     }
     function FiltragemNotebook(value){
-        if(value.type == "notebook"){
+        if(value.type === "notebook"){
             return value
         }
     }
     function FiltragemAcessory(value){
-        if(value.type == "acessory"){
+        if(value.type === "acessory"){
             return value
         }
     }

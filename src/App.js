@@ -20,7 +20,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
-                    <Route path="/" element={<Loja/>}></Route>
+                    <Route path="/loja" element={<Loja/>}></Route>
                 </Routes>
                 </BrowserRouter>
             </UserContext.Provider>

@@ -20,13 +20,6 @@ export default function Loja(){
     const [acessorys,setAcessorys]=useState([])
     const [videos,setVideos]=useState([])
     const [notebooks,setNotebooks]=useState([])
-    
-   
-
-  
-
-   
-
 
     function FiltragemVideo(value){
         if(value.type === "video-card"){

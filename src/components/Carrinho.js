@@ -39,7 +39,9 @@ export default function Carrinho(){
             <h1>Endereço:</h1>
             <h2>Logradouro</h2>
             <input type='text' value={endereço} onChange={(e)=>setEndereço(e.target.value)} />
+            <Link to="/checkout">
             <button type='submit'>Comprar !</button>
+          </Link>
         </Endereço>
         </>
     )

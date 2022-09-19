@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Loja from './components/Loja/Loja'
 import Carrinho from './components/Carrinho';
+import Checkout from './components/Checkout';
 
 import UserContext from '../src/contexts/UserContext';
 
@@ -23,8 +24,9 @@ function App() {
                 <Routes>
                      <Route path="/" element={<Login />} /> 
                     <Route path="/cadastro" element={<Cadastro />} />
-                    <Route path="/" element={<Loja/>}></Route>
+                    <Route path="/loja" element={<Loja/>}></Route>
                     <Route path="/carrinho" element={<Carrinho/>}></Route>
+                    <Route path="/checkout" element={<Checkout/>}></Route>
                 </Routes>
                 </BrowserRouter>
             </UserContext.Provider>

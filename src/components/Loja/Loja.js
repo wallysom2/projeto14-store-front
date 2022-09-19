@@ -7,6 +7,10 @@ import Produtos from "../Produtos";
 import { useEffect,useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate,Link } from 'react-router-dom';
+import produtos from '../../itens/itens'
+
+
+
 
 
 
@@ -17,14 +21,12 @@ export default function Loja(){
     const [acessorys,setAcessorys]=useState([])
     const [videos,setVideos]=useState([])
     const [notebooks,setNotebooks]=useState([])
-    const [produtox,setProdutox]=useState([])
-    const [namesX,setNamesX]=useState([])
-    const [pricesX,setPricesX]=useState([])
-    const [imagesX,setImagesX]=useState([])
-    const [is,setIs]=useState([])
-    let index1;
-    let index2;
-    let index3;
+    
+   
+
+  
+
+   
 
 
     function FiltragemVideo(value){
@@ -42,66 +44,67 @@ export default function Loja(){
             return value
         }
     }
+ //TESTES - APAGAR AO CONCERTAR API
+ useEffect(()=>{
+function testagem(){
+ setVideos(produtos.filter(FiltragemVideo))
+         setNotebooks(produtos.filter(FiltragemNotebook))
+       setAcessorys(produtos.filter(FiltragemAcessory))
+}
+testagem()
+},[])
 
+  //TESTES - APAGAR AO CONCERTAR API
 
-    useEffect(()=>{
-        async function Itens(){
-            try{
-                const promise=await axios.get('http://localhost:5000/produtos')
-                const produtos = promise.data
-                setProdutox(produtos)
-                setVideos(produtos.filter(FiltragemVideo))
-                setNotebooks(produtos.filter(FiltragemNotebook))
-                setAcessorys(produtos.filter(FiltragemAcessory))
+    // useEffect(()=>{
+    //     async function Itens(){
+    //         try{
+    //             const promise=await axios.get('http://localhost:5000/produtos')
+    //             const produtos = promise.data
+    //             setProdutox(produtos)
+    //             setVideos(produtos.filter(FiltragemVideo))
+    //             setNotebooks(produtos.filter(FiltragemNotebook))
+    //             setAcessorys(produtos.filter(FiltragemAcessory))
 
-            }catch(error){
-                console.log(error)
-            }
-        }
-        Itens()
-    },[])
+    //         }catch(error){
+    //             console.log(error)
+    //         }
+    //     }
+    //     Itens()
+    // },[])
 
-    function teste(){
-    //     setIs(is.push(imagesX))
-    //     setIs(is.push(namesX))
-    //    setIs(is.push(pricesX))
-        //is.map((i)=>{return({name:namesX, image:imagesX,price:pricesX,teste:i})})
-       //console.log(imagesX)
-       console.log(is) 
-    }
-    
+   
     
     return(
         <>
        < GlobalStyle/>
         <Header>
           <h1>TechZone</h1> 
-           < IoCartOutline style={style}/>
+          <Link to='/carrinho'> < IoCartOutline style={style}/></Link>
         </Header>
         <Welcome>Seja Bem vindo Fulano!</Welcome>
-        <div onClick={teste}>TRETA</div>
         <Category>
             <h1>Acessórios</h1>
             <Objetos>
-           {acessorys.map((acessory,index)=>{return(<Produtos name={acessory.name} price={acessory.price} image={acessory.image} setNamesX={setNamesX} namesX={namesX} setPricesX={setPricesX} pricesX={pricesX} setImagesx={setImagesX} imagesX={imagesX} index={index} acessory={acessory} is={is} setIs={setIs}/>)})}
+           {acessorys.map((acessory,index)=>{return(<Produtos name={acessory.name} price={acessory.price} image={acessory.image} index={index} acessory={acessory} />)})}
            </Objetos>
         </Category>
         <Category>
             <h1>Placas de vídeo</h1>
             <Objetos>
-           {videos.map((video)=>{return(<Produtos name={video.name} price={video.price} image={video.image}/>)})}
+           {videos.map((video,index)=>{return(<Produtos name={video.name} price={video.price} image={video.image} index={index} acessory={video}/>)})}
            </Objetos>
         </Category>
         <Category>
             <h1>Peças</h1>
             <Objetos>
-           {notebooks.map((notebook,index)=>{return(<Produtos indx={index}name={notebook.name} price={notebook.price} image={notebook.image}/>)})}
+           {notebooks.map((notebook,index)=>{return(<Produtos index={index}name={notebook.name} price={notebook.price} image={notebook.image} acessory={notebook}/>)})}
            </Objetos>
         </Category>
         <Category>
             <h1>Produtos em destaque</h1>
             <Objetos>
-               {produtox.map((produto)=>{return(<Produtos name={produto.name} price={produto.price} image={produto.image}/>)})} 
+               {produtos.map((produto,index)=>{return(<Produtos name={produto.name} price={produto.price} image={produto.image} index={index} acessory={produto}/>)})} 
             </Objetos>
             
         </Category>

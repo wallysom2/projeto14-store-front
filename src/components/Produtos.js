@@ -1,29 +1,22 @@
 import styled from "styled-components"
 import { useEffect,useState } from "react";
+import React, { useContext } from 'react';
+import UserContext from '../contexts/UserContext';
 
-export default function Produtos({name,price,image,acessory,setPricesX,pricesX,setImagesX,imagesX,setNamesX,namesX,index,is,setIs}){
- 
+export default function Produtos({name,price,image,acessory,index}){
+ const{carrinho,setCarrinho}=  useContext(UserContext);
     //const [is,setIs]=useState([])
+    
 
    function selecionado(){
+ 
+    const obj={...acessory}
+    setCarrinho([...carrinho,acessory])
+    console.log(carrinho)
 
-     setIs(name.push(index))
-     console.log(is)
    }
-   
-   
-    // function FiltragemEscolhido(value){
-    //   if(acessory[value] === index){
-    //     return value
-    //   }
-     
-        
-    // } function selecionado(){
-    //     const teste=acessory.filter(FiltragemEscolhido)
-    //     console.log(teste)
-    //   }
     return(
-        <>
+      
          <Products key={index} onClick={selecionado}>
              <div>
                 <img src={image}/>
@@ -32,7 +25,7 @@ export default function Produtos({name,price,image,acessory,setPricesX,pricesX,s
                 </div>
                 
             </Products>
-        </>
+       
     )
 }
 

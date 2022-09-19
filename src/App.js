@@ -12,16 +12,18 @@ import UserContext from '../src/contexts/UserContext';
 function App() {
 
     const [user, setUser] = useState(null);
+    const [carrinho,setCarrinho]=useState([])
+
 
     return (
       <div className="App">
-            <UserContext.Provider value={{ user, setUser }}>
+            <UserContext.Provider value={{ user, setUser,carrinho,setCarrinho }}>
             <GlobalStyle/>
                 <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Login />} /> 
+                     <Route path="/" element={<Login />} /> 
                     <Route path="/cadastro" element={<Cadastro />} />
-                    <Route path="/loja" element={<Loja/>}></Route>
+                    <Route path="/" element={<Loja/>}></Route>
                     <Route path="/carrinho" element={<Carrinho/>}></Route>
                 </Routes>
                 </BrowserRouter>

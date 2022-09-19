@@ -5,16 +5,26 @@ import { createGlobalStyle } from 'styled-components'
 import Produtos from "../Produtos";
 import { useEffect,useState } from "react";
 import axios from "axios";
+import { useParams, useNavigate,Link } from 'react-router-dom';
 
 
 
 
 export default function Loja(){
+    const {loja}=useParams()
     const style = { color: "yellow", fontSize: "2.3em" }
     const [acessorys,setAcessorys]=useState([])
     const [videos,setVideos]=useState([])
     const [notebooks,setNotebooks]=useState([])
     const [produtox,setProdutox]=useState([])
+    const [namesX,setNamesX]=useState([])
+    const [pricesX,setPricesX]=useState([])
+    const [imagesX,setImagesX]=useState([])
+    const [is,setIs]=useState([])
+    let index1;
+    let index2;
+    let index3;
+
 
     function FiltragemVideo(value){
         if(value.type === "video-card"){
@@ -50,6 +60,16 @@ export default function Loja(){
         Itens()
     },[])
 
+    function teste(){
+    //     setIs(is.push(imagesX))
+    //     setIs(is.push(namesX))
+    //    setIs(is.push(pricesX))
+        //is.map((i)=>{return({name:namesX, image:imagesX,price:pricesX,teste:i})})
+       //console.log(imagesX)
+       console.log(is) 
+    }
+    
+    
     return(
         <>
        < GlobalStyle/>
@@ -58,10 +78,11 @@ export default function Loja(){
            < IoCartOutline style={style}/>
         </Header>
         <Welcome>Seja Bem vindo Fulano!</Welcome>
+        <div onClick={teste}>TRETA</div>
         <Category>
             <h1>Acessórios</h1>
             <Objetos>
-           {acessorys.map((acessory)=>{return(<Produtos name={acessory.name} price={acessory.price} image={acessory.image}/>)})}
+           {acessorys.map((acessory,index)=>{return(<Produtos name={acessory.name} price={acessory.price} image={acessory.image} setNamesX={setNamesX} namesX={namesX} setPricesX={setPricesX} pricesX={pricesX} setImagesx={setImagesX} imagesX={imagesX} index={index} acessory={acessory} is={is} setIs={setIs}/>)})}
            </Objetos>
         </Category>
         <Category>
@@ -73,7 +94,7 @@ export default function Loja(){
         <Category>
             <h1>Peças</h1>
             <Objetos>
-           {notebooks.map((notebook)=>{return(<Produtos name={notebook.name} price={notebook.price} image={notebook.image}/>)})}
+           {notebooks.map((notebook,index)=>{return(<Produtos indx={index}name={notebook.name} price={notebook.price} image={notebook.image}/>)})}
            </Objetos>
         </Category>
         <Category>

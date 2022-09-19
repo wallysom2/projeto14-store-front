@@ -1,9 +1,30 @@
 import styled from "styled-components"
+import { useEffect,useState } from "react";
 
-export default function Produtos({name,price,image}){
+export default function Produtos({name,price,image,acessory,setPricesX,pricesX,setImagesX,imagesX,setNamesX,namesX,index,is,setIs}){
+ 
+    //const [is,setIs]=useState([])
+
+   function selecionado(){
+
+     setIs(name.push(index))
+     console.log(is)
+   }
+   
+   
+    // function FiltragemEscolhido(value){
+    //   if(acessory[value] === index){
+    //     return value
+    //   }
+     
+        
+    // } function selecionado(){
+    //     const teste=acessory.filter(FiltragemEscolhido)
+    //     console.log(teste)
+    //   }
     return(
         <>
-         <Products>
+         <Products key={index} onClick={selecionado}>
              <div>
                 <img src={image}/>
                <h1>{name}</h1>

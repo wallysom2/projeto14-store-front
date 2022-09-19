@@ -4,13 +4,19 @@ import {BsFillCaretLeftFill} from 'react-icons/bs'
 import {CgLoadbar} from "react-icons/cg"
 import {CgMathPlus} from "react-icons/cg"
 import { useState} from 'react';
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useNavigate,useParams } from "react-router-dom";
+import UserContext from '../contexts/UserContext';
+import React, { useContext } from 'react';
+import Pay from "./Pay"
+
 
 
 export default function Carrinho(){
+    const {carrinhos}=useParams()
+    const{carrinho,setCarrinho}=  useContext(UserContext);
     const style1= { color: "white", fontSize: "2.3em" }
-    const style2={fontSize:"3.5em",border:"4px solid green",color:"green"}
-    const style3={fontSize:"3.5em",border:"4px solid red",color:"red"}
+    // const style2={fontSize:"3.5em",border:"4px solid green",color:"green"}
+    // const style3={fontSize:"3.5em",border:"4px solid red",color:"red"}
     const [endereço,setEndereço]=useState("")
 
     async function Comprar(event){
@@ -27,66 +33,7 @@ export default function Carrinho(){
           <h1>CARRINHO</h1> 
         </Header>
         <Compras>
-            <Compra>
-                <div>
-                    <img src='https://images.kabum.com.br/produtos/fotos/161799/placa-de-video-asus-rog-strix-rtx3080ti-o12g-gaming-90yv0gt1-m0nm00_1622660951_g.jpg'/>
-                </div>
-                <span>
-                    <h1>RX 3070 Ti</h1>
-                    <h2>Quantidade 1x</h2>
-                    <h3>R$ 1350,00</h3>
-                </span>
-                <Incremento>
-                 <CgMathPlus style={style2}/>
-                    <h1>12</h1>
-                <CgLoadbar style={style3}/>
-                </Incremento>
-            </Compra>
-            <Compra>
-                <div>
-                    <img src='https://images.kabum.com.br/produtos/fotos/161799/placa-de-video-asus-rog-strix-rtx3080ti-o12g-gaming-90yv0gt1-m0nm00_1622660951_g.jpg'/>
-                </div>
-                <span>
-                    <h1>RX 3070 Ti</h1>
-                    <h2>Quantidade 1x</h2>
-                    <h3>R$ 1350,00</h3>
-                </span>
-                <Incremento>
-                 <CgMathPlus style={style2}/>
-                    <h1>12</h1>
-                <CgLoadbar style={style3}/>
-                </Incremento>
-            </Compra>
-            <Compra>
-                <div>
-                    <img src='https://images.kabum.com.br/produtos/fotos/161799/placa-de-video-asus-rog-strix-rtx3080ti-o12g-gaming-90yv0gt1-m0nm00_1622660951_g.jpg'/>
-                </div>
-                <span>
-                    <h1>RX 3070 Ti</h1>
-                    <h2>Quantidade 1x</h2>
-                    <h3>R$ 1350,00</h3>
-                </span>
-                <Incremento>
-                 <CgMathPlus style={style2}/>
-                    <h1>12</h1>
-                <CgLoadbar style={style3}/>
-                </Incremento>
-            </Compra>
-            <Compra>
-                <div>
-                    <img src='https://images.kabum.com.br/produtos/fotos/161799/placa-de-video-asus-rog-strix-rtx3080ti-o12g-gaming-90yv0gt1-m0nm00_1622660951_g.jpg'/>
-                </div>
-                <span>
-                    <h1>RX 3070 Ti</h1>
-                    <h2>Quantidade 1x</h2>
-                    <h3>R$ 1350,00</h3>
-                </span>
-                <Incremento>
-                 <CgMathPlus style={style2}/>
-                    <h1>12</h1>
-                <CgLoadbar style={style3}/>
-                </Incremento>
-            </Compra>
+         {carrinho.map((car,index)=>{return(<Pay name={car.name} image={car.image} price={car.price} index={index} setCarrinho={setCarrinho}/>)})} 
         </Compras>
         <Endereço onSubmit={Comprar}>
             <h1>Endereço:</h1>
@@ -245,4 +192,18 @@ const GlobalStyle = createGlobalStyle`
   }`
 
 
-  
+//   <Compra>
+//   <div>
+//       <img src='https://images.kabum.com.br/produtos/fotos/161799/placa-de-video-asus-rog-strix-rtx3080ti-o12g-gaming-90yv0gt1-m0nm00_1622660951_g.jpg'/>
+//   </div>
+//   <span>
+//       <h1>RX 3070 Ti</h1>
+//       <h2>Quantidade 1x</h2>
+//       <h3>R$ 1350,00</h3>
+//   </span>
+//   <Incremento>
+//    <CgMathPlus style={style2}/>
+//       <h1>12</h1>
+//   <CgLoadbar style={style3}/>
+//   </Incremento>
+// </Compra>
